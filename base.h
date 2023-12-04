@@ -9,8 +9,8 @@ class Base {
 public:
     virtual ~Base() = default;
 
-    virtual void saveToFile(const std::string& filename) const = 0;
-    virtual void loadFromFile(const std::string& filename) = 0;
+    virtual void saveToFile(std::ofstream& file) const = 0;
+    virtual void loadFromFile(std::ifstream& file) = 0;
 };
 
 #endif // BASE_H

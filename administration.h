@@ -2,6 +2,9 @@
 #define ADMINISTRATION_H
 
 #include "base.h"
+#include <fstream>
+#include <string>
+
 
 class Administration : public Base {
 private:
@@ -10,16 +13,20 @@ private:
     std::string responsibility;
 
 public:
-    Administration();  // Конструктор по умолчанию
+    Administration();
     Administration(const std::string& fullName, const std::string& position, const std::string& responsibility);
-    Administration(const Administration& other);  // Конструктор копирования
-    ~Administration() override;  // Деструктор
+    Administration(const Administration& other);
+    ~Administration() override;
 
-    // Геттеры и сеттеры для данных
+    const std::string& getFullName() const;
+    const std::string& getPosition() const;
+    const std::string& getResponsibility() const;
 
-    void saveToFile(const std::string& filename) const override;
-    void loadFromFile(const std::string& filename) override;
+    void setFullName(const std::string& name);
+    void setPosition(const std::string& pos);
+    void setResponsibility(const std::string& resp);
+    void saveToFile(std::ofstream& file) const override;
+    void loadFromFile(std::ifstream& file) override;
 };
 
 #endif // ADMINISTRATION_H
-

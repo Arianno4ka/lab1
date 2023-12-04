@@ -1,32 +1,37 @@
+
+
 #ifndef CONFERENCE_H
 #define CONFERENCE_H
 
 #include "base.h"
 #include "speaker.h"
 #include "administration.h"
+#include "event.h"
+#include <vector>
 
 class Conference : public Base {
 private:
-    std::vector<Speaker> speakers;
-    std::vector<Administration> administration;
-    // Дополнительные данные для программы
+    std::vector<Speaker*> speakers;
+    std::vector<Administration*> administration;
+    std::vector<Event*> events;
 
 public:
-    Conference();  // Конструктор по умолчанию
-    Conference(const std::vector<Speaker>& speakers, const std::vector<Administration>& administration);
-    Conference(const Conference& other);  // Конструктор копирования
-    ~Conference() override;  // Деструктор
+    Conference();
+    ~Conference() override;
 
     void addSpeaker(const Speaker& speaker);
-    void removeSpeaker(const std::string& name);  // Предполагаем, что у каждого участника уникальное имя
-
     void addAdministration(const Administration& admin);
-    void removeAdministration(const std::string& name);  // Предполагаем, что у каждого участника уникальное имя
+    void addEvent(const Event& event);
 
-    // Методы для работы с программой
+    void removeSpeaker(const std::string& name);
+    void removeAdministration(const std::string& name);
+    void removeEvent(const std::string& title);
 
-    void saveToFile(const std::string& filename) const override;
-    void loadFromFile(const std::string& filename) override;
+    void printEventInfo() const;
+    void printAdminInfo() const;
+    void printSpeakerInfo() const;
+    void saveToFile(std::ofstream& file) const override;
+    void loadFromFile(std::ifstream& file) override;
 };
 
 #endif // CONFERENCE_H

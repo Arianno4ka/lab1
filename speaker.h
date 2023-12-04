@@ -2,6 +2,9 @@
 #define SPEAKER_H
 
 #include "base.h"
+#include <fstream>
+#include <string>
+using namespace std;
 
 class Speaker : public Base {
 private:
@@ -11,16 +14,25 @@ private:
     std::string presentationAbstract;
 
 public:
-    Speaker();  // Конструктор по умолчанию
+    Speaker();
     Speaker(const std::string& fullName, const std::string& organization,
         const std::string& presentationTitle, const std::string& presentationAbstract);
-    Speaker(const Speaker& other);  // Конструктор копирования
-    ~Speaker() override;  // Деструктор
+    Speaker(const Speaker& other);
+    ~Speaker() override;
 
-    // Геттеры и сеттеры для данных
+    const std::string& getFullName() const;
+    const std::string& getOrganization() const;
+    const std::string& getPresentationTitle() const;
+    const std::string& getPresentationAbstract() const;
 
-    void saveToFile(const std::string& filename) const override;
-    void loadFromFile(const std::string& filename) override;
+    void setFullName(const std::string& name);
+    void setOrganization(const std::string& org);
+    void setPresentationTitle(const std::string& title);
+    void setPresentationAbstract(const std::string& abstract);
+
+
+    void saveToFile(std::ofstream& file) const override;
+    void loadFromFile(std::ifstream& file) override;
 };
 
 #endif // SPEAKER_H
